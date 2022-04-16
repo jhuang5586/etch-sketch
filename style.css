@@ -1,3 +1,12 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  margin-bottom: 50px;
+}
 body {
   display: flex;
   flex-direction: column;
@@ -6,7 +15,6 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: repeat(16, 1fr);
   width: 480px;
 }
 
@@ -15,8 +23,16 @@ body {
 }
 
 .cell {
-  width: 30px;
-  height: 30px;
   background: white;
   border: 1px solid black;
+}
+
+p,
+label {
+  font: 1rem "Fira Sans", sans-serif;
+}
+
+input {
+  margin: 1.5rem;
+  accent-color: black;
 }
