@@ -1,10 +1,12 @@
 const grid = document.getElementById("container");
+const selectedGridSize = document.getElementById("selectedGridSize");
+let isMouseDown = false;
 
 function turnBlack(e) {
-  // console.log(e.target);
   e.target.style.background = "black";
 }
 generateGrid(16);
+selectedGridSize.textContent = `${16}x${16}`;
 
 function generateGrid(gridSize) {
   grid.innerHTML = "";
@@ -15,8 +17,19 @@ function generateGrid(gridSize) {
     cell.classList.add("cell");
     cell.style.width = `${480 / gridSize}px`;
     cell.style.height = `${480 / gridSize}px`;
+    cell.addEventListener("mousedown", (e) => {
+      isMouseDown = true;
+      turnBlack(e);
+    });
+    cell.addEventListener("mouseup", () => {
+      isMouseDown = false;
+    });
+    cell.addEventListener("mouseover", (e) => {
+      if (isMouseDown === true) {
+        turnBlack(e);
+      }
+    });
 
-    cell.addEventListener("mouseenter", turnBlack);
     grid.appendChild(cell);
   }
 }
@@ -32,10 +45,10 @@ function clearBoard() {
 }
 
 const slider = document.getElementById("slider");
-slider.addEventListener("change", getGridSize);
+slider.addEventListener("input", getGridSize);
 
 function getGridSize(e) {
-  console.log(e.target.value);
   const gridSize = e.target.value;
+  selectedGridSize.textContent = `${gridSize}x${gridSize}`;
   generateGrid(gridSize);
 }
