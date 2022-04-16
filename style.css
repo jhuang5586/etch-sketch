@@ -3,3 +3,14 @@
   grid-template-columns: repeat(16, 1fr);
   width: 480px;
 }
+
+.clear-btn {
+  margin-top: 50px;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  background: white;
+  border: 1px solid black;
+}
