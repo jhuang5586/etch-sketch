@@ -1,13 +1,17 @@
 const grid = document.getElementById("container");
 const selectedGridSize = document.getElementById("selectedGridSize");
 let isMouseDown = false;
+let isRainbow = false;
 
 function turnBlack(e) {
   e.target.style.background = "black";
 }
+
+//initialize board with 16x16
 generateGrid(16);
 selectedGridSize.textContent = `${16}x${16}`;
 
+//takes number of rows and generates a square grid
 function generateGrid(gridSize) {
   grid.innerHTML = "";
   grid.style["grid-template-columns"] = `repeat(${gridSize}, 1fr)`;
@@ -19,14 +23,24 @@ function generateGrid(gridSize) {
     cell.style.height = `${480 / gridSize}px`;
     cell.addEventListener("mousedown", (e) => {
       isMouseDown = true;
-      turnBlack(e);
+      if (isRainbow === true) {
+        let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        e.target.style.background = "#" + randomColor;
+      } else {
+        turnBlack(e);
+      }
     });
     cell.addEventListener("mouseup", () => {
       isMouseDown = false;
     });
     cell.addEventListener("mouseover", (e) => {
       if (isMouseDown === true) {
-        turnBlack(e);
+        if (isRainbow === true) {
+          let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+          e.target.style.background = "#" + randomColor;
+        } else {
+          turnBlack(e);
+        }
       }
     });
 
@@ -34,6 +48,7 @@ function generateGrid(gridSize) {
   }
 }
 
+//button to clear board
 const clear = document.getElementById("clear");
 clear.addEventListener("click", clearBoard);
 
@@ -44,6 +59,7 @@ function clearBoard() {
   });
 }
 
+//slider to adjust grid size
 const slider = document.getElementById("slider");
 slider.addEventListener("input", getGridSize);
 
@@ -51,4 +67,20 @@ function getGridSize(e) {
   const gridSize = e.target.value;
   selectedGridSize.textContent = `${gridSize}x${gridSize}`;
   generateGrid(gridSize);
+}
+
+//create rainbow toggle
+const rainbow = document.getElementById("rainbow-btn");
+rainbow.addEventListener("click", turnRainbow);
+
+function turnRainbow() {
+  isRainbow = !isRainbow;
+  console.log(`rainbow is ${isRainbow}`);
+  // if (isRainbow === false) {
+  //   isRainbow = true;
+  //   console.log("rainbow true");
+  // } else {
+  //   isRainbow = false;
+  //   console.log("rainbow false");
+  // }
 }
