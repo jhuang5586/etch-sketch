@@ -70,17 +70,14 @@ function getGridSize(e) {
 }
 
 //create rainbow toggle
-const rainbow = document.getElementById("rainbow-btn");
-rainbow.addEventListener("click", turnRainbow);
+const rainbowButton = document.getElementById("rainbow-btn");
+rainbowButton.addEventListener("click", turnRainbow);
 
 function turnRainbow() {
   isRainbow = !isRainbow;
+  isRainbow
+    ? rainbowButton.classList.add("btnClicked")
+    : rainbowButton.classList.remove("btnClicked");
+
   console.log(`rainbow is ${isRainbow}`);
-  // if (isRainbow === false) {
-  //   isRainbow = true;
-  //   console.log("rainbow true");
-  // } else {
-  //   isRainbow = false;
-  //   console.log("rainbow false");
-  // }
 }
