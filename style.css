@@ -16,6 +16,8 @@ body {
 .container {
   display: grid;
   width: 480px;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
 }
 
 .clear-btn {
@@ -24,7 +26,8 @@ body {
 
 .cell {
   background: white;
-  border: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 p,
